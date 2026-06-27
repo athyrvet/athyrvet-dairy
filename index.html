@@ -93,16 +93,16 @@
     .hero-bg {
       position: absolute; inset: 0;
       background-image: url('images/hero-cows-sunset.jpg');
-      background-size: cover; background-position: center 60%;
+      background-size: cover; background-position: center 20%;
     }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(17,40,64,.82) 0%, rgba(17,40,64,.55) 60%, rgba(17,40,64,.25) 100%);
+      background: linear-gradient(to right, rgba(17,40,64,.95) 0%, rgba(17,40,64,.90) 38%, rgba(17,40,64,.40) 65%, rgba(17,40,64,.06) 100%);
     }
-    .hero-content { position: relative; z-index: 1; padding-top: 6rem; max-width: 680px; }
+    .hero-content { position: relative; z-index: 1; padding-top: 6rem; max-width: 520px; }
     .hero-eyebrow {
       font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--steel); margin-bottom: 1.25rem;
+      color: #fff; margin-bottom: 1.25rem;
     }
     .hero-headline {
       font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.8rem);
@@ -254,29 +254,7 @@
     .contact-detail-value a { color: rgba(255,255,255,.85); text-decoration: none; }
     .contact-detail-value a:hover { color: #fff; }
 
-    .contact-form-wrap { position: relative; overflow: hidden; min-width: 0; }
-    .contact-form-bg {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      animation: bgfade1 16s infinite;
-    }
-    @keyframes bgfade1 {
-      0%,40%  { opacity: 1; background-image: url('images/contact-barn-corridor.jpg'); }
-      50%     { opacity: 0; background-image: url('images/contact-barn-corridor.jpg'); }
-      51%,90% { opacity: 0; background-image: url('images/contact-farm-sunrise.jpg'); }
-      100%    { opacity: 1; background-image: url('images/contact-farm-sunrise.jpg'); }
-    }
-    .contact-form-bg-2 {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      animation: bgfade2 16s infinite;
-    }
-    @keyframes bgfade2 {
-      0%,40%  { opacity: 0; background-image: url('images/contact-farm-sunrise.jpg'); }
-      50%     { opacity: 1; background-image: url('images/contact-farm-sunrise.jpg'); }
-      90%,100%{ opacity: 0; background-image: url('images/contact-farm-sunrise.jpg'); }
-    }
-    .contact-form-overlay { position: absolute; inset: 0; background: rgba(17,40,64,.72); }
+    .contact-form-wrap { position: relative; overflow: hidden; min-width: 0; background: #1e4570; }
     .contact-form-inner {
       position: relative; z-index: 1;
       padding: 4rem 2.5rem;
@@ -372,7 +350,7 @@
       <a href="#training">Training</a>
       <a href="#contact">Contact</a>
     </div>
-    <a href="#contact" class="nav-cta">Work With Us</a>
+    <a href="#contact" class="nav-cta">Get Started</a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -392,7 +370,7 @@
         <p class="hero-sub">The cows are talking to you. Your data already has the answers. I translate them into action &mdash; before it gets expensive.</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn--primary">Talk to Dr. V</a>
-          <a href="#services" class="btn btn--outline">What We Do</a>
+          <a href="#services" class="btn btn--outline">See Services</a>
         </div>
       </div>
     </div>
@@ -429,12 +407,12 @@
         <div>
           <p class="section-eyebrow">About</p>
           <div class="rule"></div>
-          <h2 class="section-title">The only vet who speaks fluent cow &mdash; and fluent data.</h2>
+          <h2 class="section-title">When data and cow sense come from the same person.</h2>
           <p class="section-body" style="margin-bottom: 1.25rem;">
-            I am Dr. V &mdash; veterinary epidemiologist, board-certified preventive medicine specialist, and the person dairy farms call when the data says something is wrong but nobody can figure out what.
+            Dr. V is a veterinary epidemiologist and board-certified preventive medicine specialist &mdash; the resource dairy farms reach for when the data flags a problem and the cause isn&rsquo;t obvious.
           </p>
           <p class="section-body" style="margin-bottom: 1.25rem;">
-            Most dairies have data. Few have answers. That gap is where I work. Whether it is reproductive efficiency, involuntary culling, or herd health events you cannot explain &mdash; I follow the data until it tells me exactly where to look first.
+            Most dairies have data. Few have answers. That gap is where the work happens. Whether it is reproductive efficiency, involuntary culling, or herd health events that defy explanation &mdash; the data gets followed until it points to exactly where to look first.
           </p>
           <p class="section-body" style="margin-bottom: 2rem;">
             Founded in 2008. Trained at UC Davis. Proven in some of the world&rsquo;s most complex dairy operations. Now working for yours.
@@ -447,7 +425,7 @@
             <span class="cred-line">CVFT &middot; CVBMA &middot; FADD</span>
           </div>
           <blockquote class="about-quote">
-            &ldquo;The cows are talking to us. We just need to learn how to listen.&rdquo;
+            &ldquo;The cows are always talking. Data makes it possible to finally hear them.&rdquo;
           </blockquote>
         </div>
       </div>
@@ -608,9 +586,6 @@
       </div>
 
       <div class="contact-form-wrap">
-        <div class="contact-form-bg"></div>
-        <div class="contact-form-bg-2"></div>
-        <div class="contact-form-overlay"></div>
         <div class="contact-form-inner">
           <p class="contact-form-title">Send a message</p>
 
