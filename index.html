@@ -214,19 +214,21 @@
       padding: 1.5rem 2rem; border: 1px solid rgba(255,255,255,.2);
     }
 
-    /* ── Mastermind CTA ─────────────────────────────────── */
+    /* ── Mastermind CTA — single-column flow, no side-by-side grid ── */
     .mastermind { background: var(--offwhite); border-top: 3px solid var(--crimson); }
-    .mastermind-inner { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+    .mastermind-inner { max-width: 720px; }
     .mastermind-tag {
       display: inline-block; background: var(--crimson); color: #fff;
       font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
       padding: .3rem .8rem; margin-bottom: 1rem;
     }
+    /* Coming soon button in mastermind uses sans-serif like surrounding body text */
+    .mastermind .btn { font-family: inherit; }
 
     /* ── Stay Tuned ─────────────────────────────────────── */
     .stay-tuned { background: var(--navy); color: #fff; text-align: center; }
     .stay-tuned .section-title { color: #fff; margin: 0 auto 1rem; }
-    .stay-tuned .section-body { color: rgba(255,255,255,.75); margin: 0 auto 2rem; max-width: 560px; }
+    .stay-tuned .section-body { color: rgba(255,255,255,.75); margin: 0 auto 2rem; max-width: 640px; }
     .stay-tuned-email {
       display: inline-block;
       font-family: var(--serif); font-size: 1.1rem;
@@ -331,8 +333,6 @@
     }
     .footer-links a:hover { color: rgba(255,255,255,.8); }
     .footer-divisions { font-size: .78rem; color: rgba(255,255,255,.35); margin-top: .5rem; }
-    .footer-divisions a { color: rgba(255,255,255,.45); text-decoration: none; }
-    .footer-divisions a:hover { color: rgba(255,255,255,.7); }
 
     /* ── Responsive ─────────────────────────────────────── */
     @media (max-width: 1024px) {
@@ -348,7 +348,6 @@
       .contact-split { grid-template-columns: 1fr; }
       .contact-info { padding: 3.5rem 2rem; }
       .contact-form-inner { padding: 3rem 2rem; }
-      .mastermind-inner { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .nav-toggle { display: block; }
@@ -530,23 +529,19 @@
     </div>
   </section>
 
-  <!-- Mastermind CTA -->
+  <!-- Mastermind CTA — single-column layout -->
   <section class="mastermind" id="training">
     <div class="container">
       <div class="mastermind-inner">
-        <div>
-          <span class="mastermind-tag">Online Training</span>
-          <h2 class="section-title" style="font-size: clamp(1.2rem, 2vw, 1.65rem);">Afimilk Training &mdash; On Your Schedule</h2>
-          <p class="section-body" style="margin-bottom: 1.5rem;">
-            A complete six-module curriculum covering everything from getting started to advanced analytics &mdash; recorded, structured, and available on demand. 27 sessions. Zero travel required.
-          </p>
-          <p style="font-size: .9rem; color: #4a6275;">
-            Modules: Getting Started &middot; Daily Lists &middot; Reports &middot; Parlor Management &middot; Data Management &middot; Advanced Analytics
-          </p>
-        </div>
-        <div style="flex-shrink: 0;">
-          <span class="btn btn--navy" style="opacity:.45; cursor:default; pointer-events:none;">Coming soon</span>
-        </div>
+        <span class="mastermind-tag">Online Training</span>
+        <h2 class="section-title">Afimilk Training &mdash; On Your Schedule</h2>
+        <p class="section-body" style="margin-bottom: 1.5rem;">
+          A six-module curriculum in development &mdash; from getting started to advanced analytics. Recorded, self-paced, and available without travel.
+        </p>
+        <p style="font-size: .9rem; color: #4a6275; margin-bottom: 2rem;">
+          Modules: Getting Started &middot; Daily Lists &middot; Reports &middot; Parlor Management &middot; Data Management &middot; Advanced Analytics
+        </p>
+        <span class="btn btn--navy" style="opacity:.45; cursor:default; pointer-events:none;">Coming soon</span>
       </div>
     </div>
   </section>
@@ -664,11 +659,7 @@
       <div class="footer-inner">
         <div>
           <div class="footer-copy">&copy; 2008&ndash;2026 Athyr Vet, LLC &middot; aurora@athyrvet.com &middot; (541) 207-8003</div>
-          <div class="footer-divisions">
-            AthyrVet divisions: Dairy &nbsp;&middot;&nbsp;
-            <a href="https://balance.athyrvet.com">Balance</a> &nbsp;&middot;&nbsp;
-            <a href="https://epilogic.athyrvet.com">EpiLogic</a>
-          </div>
+          <div class="footer-divisions">AthyrVet divisions: Dairy &nbsp;&middot;&nbsp; Balance &nbsp;&middot;&nbsp; EpiLogic</div>
         </div>
         <div class="footer-links">
           <a href="#about">About</a>
