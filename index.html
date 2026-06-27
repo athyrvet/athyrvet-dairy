@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AthyrVet — Data in. Answers out. Precisely.</title>
+  <meta name="description" content="Precision dairy consulting powered by epidemiology. AthyrVet turns your herd data into actionable answers — no guesswork, no dead cows." />
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=libre-baskerville:400,400i,700|inter:300,400,500,600" rel="stylesheet" />
+
+  <style>
+    /* ── Reset ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', Helvetica Neue, Arial, sans-serif;
+      font-weight: 300;
+      color: #1B3A5C;
+      background: #fff;
+      line-height: 1.65;
+    }
+
+    /* ── Brand tokens ───────────────────────────────────── */
+    :root {
+      --navy:    #1B3A5C;
+      --navy-dk: #112840;
+      --navy-lg: #2e5a82;
+      --crimson: #8B1A1A;
+      --steel:   #4A7BA8;
+      --offwhite:#f6f5f1;
+      --text:    #1B3A5C;
+      --serif:   'Libre Baskerville', Georgia, serif;
+    }
+
+    /* ── Utility ────────────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    .rule { width: 48px; height: 3px; background: var(--crimson); margin-bottom: 1.5rem; }
+    .rule--center { margin-left: auto; margin-right: auto; }
+    .btn {
+      display: inline-block;
+      padding: .85rem 2rem;
+      font-family: var(--serif);
+      font-size: .95rem;
+      letter-spacing: .04em;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .btn:hover { opacity: .85; }
+    .btn--primary   { background: var(--crimson); color: #fff; border: none; }
+    .btn--outline   { background: transparent; color: #fff; border: 2px solid #fff; }
+    .btn--navy      { background: var(--navy); color: #fff; border: none; }
+
+    /* ── Nav ────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(17, 40, 64, .96);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .9rem 2rem;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: .75rem;
+      text-decoration: none;
+    }
+    .nav-wordmark {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      color: var(--offwhite);
+      letter-spacing: .08em;
+    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      color: var(--offwhite); text-decoration: none;
+      font-size: .85rem; letter-spacing: .06em; text-transform: uppercase;
+      opacity: .8; transition: opacity .2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-cta {
+      padding: .45rem 1.2rem;
+      background: var(--crimson); color: #fff;
+      border-radius: 2px; font-size: .85rem;
+      text-decoration: none; letter-spacing: .04em;
+      transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .85; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
+    .nav-toggle span {
+      display: block; width: 24px; height: 2px;
+      background: #fff; margin: 5px 0; transition: .3s;
+    }
+
+    /* ── Hero ───────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('images/hero-cows-sunset.jpg');
+      background-size: cover; background-position: center 60%;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(17, 40, 64, .82) 0%,
+        rgba(17, 40, 64, .55) 60%,
+        rgba(17, 40, 64, .25) 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      padding-top: 6rem;
+      max-width: 680px;
+    }
+    .hero-eyebrow {
+      font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--steel); margin-bottom: 1.25rem;
+    }
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: .75rem;
+    }
+    .hero-headline em {
+      font-style: italic; color: var(--offwhite); opacity: .85;
+    }
+    .hero-tagline {
+      font-family: var(--serif);
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: var(--offwhite);
+      margin-bottom: 2rem;
+      letter-spacing: .04em;
+    }
+    .hero-sub {
+      font-size: .97rem; color: rgba(255,255,255,.7);
+      margin-bottom: 2.5rem; max-width: 520px;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* ── Stats bar ──────────────────────────────────────── */
+    .stats-bar {
+      background: var(--offwhite);
+      padding: 2.25rem 0;
+      border-top: 3px solid var(--crimson);
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; text-align: center;
+    }
+    .stat-num {
+      font-family: var(--serif); font-size: 2.2rem; font-weight: 700;
+      color: var(--crimson); display: block; line-height: 1;
+    }
+    .stat-label {
+      font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--navy); opacity: .7; margin-top: .4rem; display: block;
+    }
+
+    /* ── Section base ───────────────────────────────────── */
+    section { padding: 5.5rem 0; }
+    .section-eyebrow {
+      font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--crimson); margin-bottom: .75rem;
+    }
+    .section-title {
+      font-family: var(--serif); font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 700; color: var(--navy); margin-bottom: 1rem; line-height: 1.2;
+    }
+    .section-body { font-size: 1rem; color: #3a5268; max-width: 680px; }
+
+    /* ── About ──────────────────────────────────────────── */
+    .about { background: #fff; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap img {
+      width: 100%; height: 480px;
+      object-fit: cover; object-position: center top;
+      display: block;
+    }
+    .about-accent {
+      position: absolute; bottom: -16px; right: -16px;
+      width: 120px; height: 120px; background: var(--crimson); z-index: -1;
+    }
+    .about-creds {
+      margin-top: 2rem;
+      display: flex; flex-direction: column; gap: .5rem;
+    }
+    .cred-line {
+      font-size: .82rem; letter-spacing: .06em;
+      color: var(--steel); text-transform: uppercase;
+    }
+    .about-quote {
+      margin-top: 2rem;
+      padding: 1.25rem 1.5rem;
+      border-left: 3px solid var(--crimson);
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.05rem; color: var(--navy);
+      background: var(--offwhite);
+    }
+
+    /* ── Services ───────────────────────────────────────── */
+    .services { background: var(--offwhite); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem;
+    }
+    .service-card {
+      background: #fff; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(27,58,92,.07);
+    }
+    .service-card img {
+      width: 100%; height: 220px; object-fit: cover; display: block;
+    }
+    .service-card-body { padding: 1.75rem; }
+    .service-num {
+      font-family: var(--serif); font-size: .75rem;
+      letter-spacing: .14em; color: var(--crimson); display: block; margin-bottom: .5rem;
+    }
+    .service-title {
+      font-family: var(--serif); font-size: 1.25rem; font-weight: 700;
+      color: var(--navy); margin-bottom: .75rem; line-height: 1.25;
+    }
+    .service-body { font-size: .9rem; color: #4a6275; line-height: 1.6; }
+    .service-list { list-style: none; margin-top: 1rem; }
+    .service-list li {
+      font-size: .85rem; color: #4a6275; padding: .3rem 0;
+      padding-left: 1rem; position: relative;
+    }
+    .service-list li::before {
+      content: ''; position: absolute; left: 0; top: .65rem;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--crimson);
+    }
+
+    /* ── Proof ──────────────────────────────────────────── */
+    .proof {
+      background: linear-gradient(135deg, var(--navy-dk), var(--navy));
+      color: #fff; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .proof-bg {
+      position: absolute; inset: 0;
+      background-image: url('images/proof-cow-960.jpg');
+      background-size: cover; background-position: center;
+      opacity: .12;
+    }
+    .proof-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+    .proof .section-title { color: #fff; margin: 0 auto 1rem; }
+    .proof-callout {
+      font-family: var(--serif); font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-style: italic; color: var(--offwhite);
+      margin: 1.75rem auto 2rem; max-width: 600px;
+      padding: 1.5rem 2rem; border: 1px solid rgba(255,255,255,.2);
+    }
+
+    /* ── Mastermind CTA ─────────────────────────────────── */
+    .mastermind {
+      background: var(--offwhite);
+      border-top: 3px solid var(--crimson);
+    }
+    .mastermind-inner {
+      display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
+    }
+    .mastermind-tag {
+      display: inline-block; background: var(--crimson); color: #fff;
+      font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+      padding: .3rem .8rem; margin-bottom: 1rem;
+    }
+
+    /* ── Free Series ────────────────────────────────────── */
+    .free-series {
+      background: var(--navy);
+      color: #fff; text-align: center;
+    }
+    .free-series .section-title { color: #fff; margin: 0 auto 1rem; }
+    .free-series .section-body { color: rgba(255,255,255,.75); margin: 0 auto 2rem; }
+    .free-series-form {
+      max-width: 500px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .free-series-form input[type="email"] {
+      padding: .9rem 1.2rem;
+      font-size: 1rem; font-family: inherit;
+      border: 1px solid rgba(255,255,255,.3);
+      background: rgba(255,255,255,.08); color: #fff;
+      outline: none; border-radius: 2px;
+    }
+    .free-series-form input[type="email"]::placeholder { color: rgba(255,255,255,.4); }
+    .free-series-form input[type="email"]:focus { border-color: var(--steel); }
+    /* MAILERLITE_EMBED_PLACEHOLDER — replace the form above with MailerLite embed code */
+
+    /* ── Contact ────────────────────────────────────────── */
+    .contact { padding: 0; }
+    .contact-split {
+      display: grid; grid-template-columns: 1fr 1fr; min-height: 600px;
+    }
+    .contact-info {
+      background: var(--navy-dk);
+      padding: 5.5rem 3.5rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .contact-info .section-title { color: #fff; }
+    .contact-info .section-body { color: rgba(255,255,255,.75); margin-bottom: 2.5rem; }
+    .contact-detail {
+      display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem;
+    }
+    .contact-icon {
+      width: 36px; height: 36px; background: var(--crimson);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: .1rem;
+    }
+    .contact-icon svg { width: 16px; height: 16px; fill: #fff; }
+    .contact-detail-text { font-size: .95rem; }
+    .contact-detail-label {
+      font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--steel); display: block; margin-bottom: .2rem;
+    }
+    .contact-detail-value { color: rgba(255,255,255,.85); }
+    .contact-detail-value a { color: rgba(255,255,255,.85); text-decoration: none; }
+    .contact-detail-value a:hover { color: #fff; }
+
+    .contact-form-wrap { position: relative; overflow: hidden; }
+    .contact-form-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      animation: bgfade1 16s infinite;
+    }
+    @keyframes bgfade1 {
+      0%,40%  { opacity: 1; background-image: url('images/contact-barn-corridor.jpg'); }
+      50%     { opacity: 0; background-image: url('images/contact-barn-corridor.jpg'); }
+      51%,90% { opacity: 0; background-image: url('images/contact-farm-sunrise.jpg'); }
+      100%    { opacity: 1; background-image: url('images/contact-farm-sunrise.jpg'); }
+    }
+    .contact-form-bg-2 {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      animation: bgfade2 16s infinite;
+    }
+    @keyframes bgfade2 {
+      0%,40%  { opacity: 0; background-image: url('images/contact-farm-sunrise.jpg'); }
+      50%     { opacity: 1; background-image: url('images/contact-farm-sunrise.jpg'); }
+      90%,100%{ opacity: 0; background-image: url('images/contact-farm-sunrise.jpg'); }
+    }
+    .contact-form-overlay {
+      position: absolute; inset: 0;
+      background: rgba(17, 40, 64, .72);
+    }
+    .contact-form-inner {
+      position: relative; z-index: 1;
+      padding: 5.5rem 3rem;
+      display: flex; flex-direction: column; justify-content: center; height: 100%;
+    }
+    .contact-form-title {
+      font-family: var(--serif); font-size: 1.5rem; font-weight: 700;
+      color: #fff; margin-bottom: 1.5rem;
+    }
+    .form-row { display: flex; gap: 1rem; }
+    .form-field { flex: 1; display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1rem; }
+    .form-field label {
+      font-size: .75rem; letter-spacing: .08em; text-transform: uppercase;
+      color: rgba(255,255,255,.6);
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      padding: .75rem 1rem;
+      font-size: .95rem; font-family: inherit;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.25);
+      color: #fff; border-radius: 2px; outline: none;
+      transition: border-color .2s;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus { border-color: var(--steel); }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: rgba(255,255,255,.35); }
+    .form-field select option { background: var(--navy); color: #fff; }
+    .form-field textarea { resize: vertical; min-height: 100px; }
+    .form-error {
+      display: none; background: rgba(139,26,26,.2); border: 1px solid var(--crimson);
+      color: #fff; padding: .75rem 1rem; font-size: .9rem; margin-bottom: 1rem;
+      border-radius: 2px;
+    }
+    .form-success {
+      display: none; background: rgba(74,123,168,.25); border: 1px solid var(--steel);
+      color: #fff; padding: .75rem 1rem; font-size: .9rem; margin-bottom: 1rem;
+      border-radius: 2px;
+    }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    footer {
+      background: var(--navy-dk);
+      padding: 2.5rem 0;
+      border-top: 3px solid var(--crimson);
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy { font-size: .8rem; color: rgba(255,255,255,.45); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: .78rem; color: rgba(255,255,255,.45);
+      text-decoration: none; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,.8); }
+    .footer-divisions { font-size: .78rem; color: rgba(255,255,255,.35); margin-top: .5rem; }
+    .footer-divisions a { color: rgba(255,255,255,.45); text-decoration: none; }
+    .footer-divisions a:hover { color: rgba(255,255,255,.7); }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-accent { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .contact-split { grid-template-columns: 1fr; }
+      .contact-info { padding: 3.5rem 2rem; }
+      .contact-form-inner { padding: 3rem 2rem; }
+      .mastermind-inner { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
+      nav { padding: .75rem 1.25rem; }
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .hero-content { max-width: 100%; }
+    }
+    @media (max-width: 600px) {
+      .hero { min-height: 90vh; }
+      .form-row { flex-direction: column; }
+      .hero-actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="main-nav">
+    <a href="#" class="nav-logo">
+      <span class="nav-wordmark">ATHYR&nbsp;VET</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#training">Training</a>
+      <a href="#free-series">Free Series</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Work With Us</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Precision Dairy Consulting &nbsp;&middot;&nbsp; Applied Epidemiology</p>
+        <h1 class="hero-headline">
+          Data in.<br><em>Answers out.</em><br>Precisely.
+        </h1>
+        <p class="hero-tagline">No more surprise dead cows.</p>
+        <p class="hero-sub">The cows are talking to you. Your data already has the answers. I translate them into action &mdash; before it gets expensive.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn--primary">Talk to Dr. V</a>
+          <a href="#services" class="btn btn--outline">What We Do</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div>
+          <span class="stat-num">35&rarr;60%+</span>
+          <span class="stat-label">Conception rate improvement</span>
+        </div>
+        <div>
+          <span class="stat-num">20+</span>
+          <span class="stat-label">Years in dairy epidemiology</span>
+        </div>
+        <div>
+          <span class="stat-num">0</span>
+          <span class="stat-label">Surprise dead cows &mdash; that&rsquo;s the goal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img-wrap">
+          <img src="images/about-welcome-sign.jpg" alt="Welcome Dr. Aurora Villarroel" loading="lazy" />
+          <div class="about-accent"></div>
+        </div>
+        <div>
+          <p class="section-eyebrow">About</p>
+          <div class="rule"></div>
+          <h2 class="section-title">The only vet who speaks fluent cow &mdash; and fluent data.</h2>
+          <p class="section-body" style="margin-bottom: 1.25rem;">
+            I am Dr. V &mdash; veterinary epidemiologist, board-certified preventive medicine specialist, and the person dairy farms call when the data says something is wrong but nobody can figure out what.
+          </p>
+          <p class="section-body" style="margin-bottom: 1.25rem;">
+            Most dairies have data. Few have answers. That gap is where I work. Whether it is reproductive efficiency, involuntary culling, or herd health events you cannot explain &mdash; I follow the data until it tells me exactly where to look first.
+          </p>
+          <p class="section-body" style="margin-bottom: 2rem;">
+            Founded in 2008. Trained at UC Davis. Proven in some of the world&rsquo;s most complex dairy operations. Now working for yours.
+          </p>
+          <div class="about-creds">
+            <span class="cred-line">DVM &middot; MPVM &middot; PhD</span>
+            <span class="cred-line">DACVPM &mdash; Diplomate, American College of Veterinary Preventive Medicine</span>
+            <span class="cred-line">Certified Veterinary Acupuncturist (CVA)</span>
+            <span class="cred-line">Certified TCVM Practitioner (CTP)</span>
+            <span class="cred-line">CVFT &middot; CVBMA &middot; FADD</span>
+          </div>
+          <blockquote class="about-quote">
+            &ldquo;The cows are talking to us. We just need to learn how to listen.&rdquo;
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <p class="section-eyebrow">Services</p>
+      <div class="rule"></div>
+      <h2 class="section-title">Stop asking the wrong questions.</h2>
+      <p class="section-body">Targeted consulting for dairy farms that are ready to stop guessing and start reading their data correctly.</p>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <img src="images/services-data-analysis.jpg" alt="Data analysis at desk" loading="lazy" />
+          <div class="service-card-body">
+            <span class="service-num">01</span>
+            <h3 class="service-title">Afimilk &amp; Data Analysis</h3>
+            <p class="service-body">Your Afimilk system is generating answers every day. Most farms are not reading them. I do &mdash; and I show you what they mean in plain terms.</p>
+            <ul class="service-list">
+              <li>Afimilk / AfiFarm system audit</li>
+              <li>Reproductive efficiency analysis</li>
+              <li>Herd health event investigation</li>
+              <li>Custom report design and interpretation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <img src="images/services-farm-visit.jpg" alt="On-farm consulting visit" loading="lazy" />
+          <div class="service-card-body">
+            <span class="service-num">02</span>
+            <h3 class="service-title">On-Farm Consulting</h3>
+            <p class="service-body">Sometimes the data points to a problem and you need someone on the ground to close the loop. On-site investigations, protocol review, and team training.</p>
+            <ul class="service-list">
+              <li>Outbreak investigation</li>
+              <li>Herd health protocol review</li>
+              <li>Reproductive program assessment</li>
+              <li>Staff training and SOPs</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <img src="images/services-presenting.jpg" alt="Dr. V presenting at conference" loading="lazy" />
+          <div class="service-card-body">
+            <span class="service-num">03</span>
+            <h3 class="service-title">Speaking &amp; Training</h3>
+            <p class="service-body">Conference keynotes, producer workshops, and online training &mdash; built around real data from real farms. No fluff, no generic slides.</p>
+            <ul class="service-list">
+              <li>Conference presentations</li>
+              <li>Producer and veterinarian workshops</li>
+              <li>Custom team training sessions</li>
+              <li>Online curriculum (see Mastermind below)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="proof">
+    <div class="proof-bg"></div>
+    <div class="container">
+      <div class="proof-content">
+        <p class="section-eyebrow" style="color: var(--steel);">Results</p>
+        <div class="rule rule--center"></div>
+        <h2 class="section-title" style="color: #fff; max-width: 100%;">Your data already has the story.<br>Most people just cannot read it yet.</h2>
+        <blockquote class="proof-callout">
+          &ldquo;Most vets examine cows. I let the data tell me where to look first.&rdquo;
+        </blockquote>
+        <p class="section-body" style="color: rgba(255,255,255,.75); margin: 0 auto 2.5rem;">
+          When farms implement data-driven reproductive protocols informed by epidemiological analysis, conception rates move from the low 30s to 60% and above. Involuntary culling drops. Emergency calls decrease. The farm stops being reactive and starts being strategic.
+        </p>
+        <a href="#contact" class="btn btn--outline">Let&rsquo;s talk about your numbers</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mastermind CTA -->
+  <section class="mastermind" id="training">
+    <div class="container">
+      <div class="mastermind-inner">
+        <div>
+          <span class="mastermind-tag">Online Training</span>
+          <h2 class="section-title">Afimilk Training &mdash; On Your Schedule</h2>
+          <p class="section-body" style="margin-bottom: 1.5rem;">
+            A complete six-module curriculum covering everything from getting started to advanced analytics &mdash; recorded, structured, and available on demand. 27 sessions. Zero travel required.
+          </p>
+          <p style="font-size: .9rem; color: #4a6275;">
+            Modules: Getting Started &middot; Daily Lists &middot; Reports &middot; Parlor Management &middot; Data Management &middot; Advanced Analytics
+          </p>
+        </div>
+        <div style="flex-shrink: 0;">
+          <a href="https://mastermind.com" target="_blank" rel="noopener" class="btn btn--navy">Access the Training &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Free Series -->
+  <section class="free-series" id="free-series">
+    <div class="container">
+      <p class="section-eyebrow" style="color: var(--steel);">Free 12-Week Series</p>
+      <div class="rule rule--center"></div>
+      <h2 class="section-title">12 weeks. One data concept per week.<br>Free.</h2>
+      <p class="section-body">
+        No pitch. No upsell. Just twelve short videos that will change how you look at your herd data &mdash; delivered to your inbox, one per week.
+      </p>
+
+      <!-- MAILERLITE_EMBED_START -->
+      <!-- Replace the form below with your MailerLite embed code -->
+      <form class="free-series-form" id="ml-form">
+        <input type="email" name="email" placeholder="Your email address" required />
+        <button type="submit" class="btn btn--primary">Send Me the Free Series</button>
+      </form>
+      <!-- MAILERLITE_EMBED_END -->
+
+      <p style="font-size: .78rem; color: rgba(255,255,255,.4); margin-top: 1.25rem;">
+        No spam. Unsubscribe anytime.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="contact-split">
+
+      <div class="contact-info">
+        <p class="section-eyebrow" style="color: var(--steel);">Contact</p>
+        <div class="rule"></div>
+        <h2 class="section-title" style="color: #fff; max-width: 100%;">Ready to stop guessing?</h2>
+        <p class="section-body" style="color: rgba(255,255,255,.75); margin-bottom: 2.5rem;">
+          Tell me about your operation. What is your data telling you &mdash; and what questions do you still not have answers to?
+        </p>
+
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1.1.4 2.2.7 3.2a2 2 0 0 1-.5 2L8 10c1.5 2.7 3.8 5 6.5 6.5l1.2-1.2a2 2 0 0 1 2-.5c1 .3 2.1.6 3.2.7a2 2 0 0 1 1.1 2.4z"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <span class="contact-detail-label">Phone</span>
+            <span class="contact-detail-value"><a href="tel:+15412078003">(541) 207-8003</a></span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6" style="stroke:#fff;stroke-width:2;fill:none;"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <span class="contact-detail-label">Email</span>
+            <span class="contact-detail-value"><a href="mailto:aurora@athyrvet.com">aurora@athyrvet.com</a></span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14" style="stroke:#fff;stroke-width:2;fill:none;"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <span class="contact-detail-label">Time Zone</span>
+            <span class="contact-detail-value">Hawaii (GMT-10) &mdash; available worldwide</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <div class="contact-form-bg"></div>
+        <div class="contact-form-bg-2"></div>
+        <div class="contact-form-overlay"></div>
+        <div class="contact-form-inner">
+          <p class="contact-form-title">Send a message</p>
+
+          <!-- FORMSPREE: replace action="#" with your Formspree endpoint URL -->
+          <form id="contact-form" action="#" method="POST">
+            <input type="hidden" name="_subject" value="AthyrVet Dairy - New Inquiry" />
+            <div id="form-error" class="form-error">Something went wrong. Please email aurora@athyrvet.com directly.</div>
+            <div id="form-success" class="form-success">Message sent. Dr. V will be in touch within 1 business day.</div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="fname">First name</label>
+                <input type="text" id="fname" name="first_name" placeholder="Jane" required />
+              </div>
+              <div class="form-field">
+                <label for="lname">Last name</label>
+                <input type="text" id="lname" name="last_name" placeholder="Smith" required />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="cemail">Email</label>
+              <input type="email" id="cemail" name="email" placeholder="jane@yourfarm.com" required />
+            </div>
+            <div class="form-field">
+              <label for="farm">Farm / Operation name</label>
+              <input type="text" id="farm" name="farm" placeholder="Smith Dairy" />
+            </div>
+            <div class="form-field">
+              <label for="topic">What do you need help with?</label>
+              <select id="topic" name="topic">
+                <option value="">Select one</option>
+                <option value="afimilk">Afimilk / AfiFarm analysis</option>
+                <option value="reproductive">Reproductive efficiency</option>
+                <option value="herd-health">Herd health investigation</option>
+                <option value="training">Training / speaking</option>
+                <option value="other">Something else</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="message">Tell me more</label>
+              <textarea id="message" name="message" placeholder="What is the problem? What have you already tried?"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary" style="width:100%;">Send Message</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-copy">&copy; 2008&ndash;2026 Athyr Vet, LLC &middot; aurora@athyrvet.com &middot; (541) 207-8003</div>
+          <div class="footer-divisions">
+            AthyrVet divisions: Dairy &nbsp;&middot;&nbsp;
+            <a href="https://balance.athyrvet.com">Balance</a> &nbsp;&middot;&nbsp;
+            <a href="https://epilogic.athyrvet.com">EpiLogic</a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    let navOpen = false;
+    toggle.addEventListener('click', () => {
+      navOpen = !navOpen;
+      if (navOpen) {
+        navLinks.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(17,40,64,.98);padding:1.5rem 2rem;gap:1.25rem;z-index:99;';
+      } else {
+        navLinks.style.cssText = 'display:none;';
+      }
+    });
+    // Close nav on link click
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navOpen = false; navLinks.style.cssText = 'display:none;';
+    }));
+
+    // Contact form (Formspree)
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const errEl = document.getElementById('form-error');
+      const okEl  = document.getElementById('form-success');
+      errEl.style.display = 'none';
+      okEl.style.display  = 'none';
+
+      const action = contactForm.getAttribute('action');
+      if (action === '#') {
+        errEl.textContent = 'Contact form not yet configured. Please email aurora@athyrvet.com directly.';
+        errEl.style.display = 'block';
+        return;
+      }
+      try {
+        const res = await fetch(action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          okEl.style.display = 'block';
+          contactForm.reset();
+        } else {
+          const data = await res.json().catch(() => ({}));
+          errEl.textContent = (data.errors || []).map(e => e.message).join('. ') || 'Submission failed. Please email aurora@athyrvet.com.';
+          errEl.style.display = 'block';
+        }
+      } catch (err) {
+        errEl.textContent = 'Network error: ' + err.message + '. Please email aurora@athyrvet.com.';
+        errEl.style.display = 'block';
+      }
+    });
+
+    // Free series form placeholder
+    const mlForm = document.getElementById('ml-form');
+    if (mlForm) {
+      mlForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const errDiv = document.createElement('p');
+        errDiv.style.cssText = 'color:#8B1A1A;background:rgba(139,26,26,.1);padding:.75rem;margin-top:.5rem;border:1px solid #8B1A1A;font-size:.9rem;';
+        errDiv.textContent = 'MailerLite not yet connected. Replace this form with your MailerLite embed code.';
+        mlForm.parentNode.insertBefore(errDiv, mlForm.nextSibling);
+      });
+    }
+  </script>
+</body>
+</html>
