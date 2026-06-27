@@ -18,6 +18,7 @@
       color: #1B3A5C;
       background: #fff;
       line-height: 1.65;
+      overflow-x: hidden;
     }
 
     /* ── Brand tokens ───────────────────────────────────── */
@@ -28,7 +29,6 @@
       --crimson: #8B1A1A;
       --steel:   #4A7BA8;
       --offwhite:#f6f5f1;
-      --text:    #1B3A5C;
       --serif:   'Libre Baskerville', Georgia, serif;
     }
 
@@ -48,9 +48,9 @@
       transition: opacity .2s;
     }
     .btn:hover { opacity: .85; }
-    .btn--primary   { background: var(--crimson); color: #fff; border: none; }
-    .btn--outline   { background: transparent; color: #fff; border: 2px solid #fff; }
-    .btn--navy      { background: var(--navy); color: #fff; border: none; }
+    .btn--primary { background: var(--crimson); color: #fff; border: none; }
+    .btn--outline { background: transparent; color: #fff; border: 2px solid #fff; }
+    .btn--navy    { background: var(--navy); color: #fff; border: none; }
 
     /* ── Nav ────────────────────────────────────────────── */
     nav {
@@ -60,15 +60,12 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: .9rem 2rem;
     }
-    .nav-logo {
-      display: flex; align-items: center; gap: .75rem;
-      text-decoration: none;
-    }
     .nav-wordmark {
       font-family: var(--serif);
       font-size: 1.15rem;
       color: var(--offwhite);
       letter-spacing: .08em;
+      text-decoration: none;
     }
     .nav-links { display: flex; gap: 2rem; }
     .nav-links a {
@@ -86,17 +83,12 @@
     }
     .nav-cta:hover { opacity: .85; }
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
-    .nav-toggle span {
-      display: block; width: 24px; height: 2px;
-      background: #fff; margin: 5px 0; transition: .3s;
-    }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; margin: 5px 0; }
 
     /* ── Hero ───────────────────────────────────────────── */
     .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex; align-items: center;
-      overflow: hidden;
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; overflow: hidden;
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -105,56 +97,28 @@
     }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(17, 40, 64, .82) 0%,
-        rgba(17, 40, 64, .55) 60%,
-        rgba(17, 40, 64, .25) 100%
-      );
+      background: linear-gradient(135deg, rgba(17,40,64,.82) 0%, rgba(17,40,64,.55) 60%, rgba(17,40,64,.25) 100%);
     }
-    .hero-content {
-      position: relative; z-index: 1;
-      padding-top: 6rem;
-      max-width: 680px;
-    }
+    .hero-content { position: relative; z-index: 1; padding-top: 6rem; max-width: 680px; }
     .hero-eyebrow {
       font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
       color: var(--steel); margin-bottom: 1.25rem;
     }
     .hero-headline {
-      font-family: var(--serif);
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.15;
-      margin-bottom: .75rem;
+      font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: .75rem;
     }
-    .hero-headline em {
-      font-style: italic; color: var(--offwhite); opacity: .85;
-    }
+    .hero-headline em { font-style: italic; color: var(--offwhite); opacity: .85; }
     .hero-tagline {
-      font-family: var(--serif);
-      font-size: clamp(1.05rem, 2vw, 1.3rem);
-      color: var(--offwhite);
-      margin-bottom: 2rem;
-      letter-spacing: .04em;
+      font-family: var(--serif); font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: var(--offwhite); margin-bottom: 2rem; letter-spacing: .04em;
     }
-    .hero-sub {
-      font-size: .97rem; color: rgba(255,255,255,.7);
-      margin-bottom: 2.5rem; max-width: 520px;
-    }
+    .hero-sub { font-size: .97rem; color: rgba(255,255,255,.7); margin-bottom: 2.5rem; max-width: 520px; }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
     /* ── Stats bar ──────────────────────────────────────── */
-    .stats-bar {
-      background: var(--offwhite);
-      padding: 2.25rem 0;
-      border-top: 3px solid var(--crimson);
-    }
-    .stats-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem; text-align: center;
-    }
+    .stats-bar { background: var(--offwhite); padding: 2.25rem 0; border-top: 3px solid var(--crimson); }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; text-align: center; }
     .stat-num {
       font-family: var(--serif); font-size: 2.2rem; font-weight: 700;
       color: var(--crimson); display: block; line-height: 1;
@@ -178,48 +142,27 @@
 
     /* ── About ──────────────────────────────────────────── */
     .about { background: #fff; }
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
-    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
     .about-img-wrap { position: relative; }
-    .about-img-wrap img {
-      width: 100%; height: 480px;
-      object-fit: cover; object-position: center top;
-      display: block;
-    }
+    .about-img-wrap img { width: 100%; height: 480px; object-fit: cover; object-position: center top; display: block; }
     .about-accent {
       position: absolute; bottom: -16px; right: -16px;
       width: 120px; height: 120px; background: var(--crimson); z-index: -1;
     }
-    .about-creds {
-      margin-top: 2rem;
-      display: flex; flex-direction: column; gap: .5rem;
-    }
-    .cred-line {
-      font-size: .82rem; letter-spacing: .06em;
-      color: var(--steel); text-transform: uppercase;
-    }
+    .about-creds { margin-top: 2rem; display: flex; flex-direction: column; gap: .5rem; }
+    .cred-line { font-size: .82rem; letter-spacing: .06em; color: var(--steel); text-transform: uppercase; }
     .about-quote {
-      margin-top: 2rem;
-      padding: 1.25rem 1.5rem;
+      margin-top: 2rem; padding: 1.25rem 1.5rem;
       border-left: 3px solid var(--crimson);
-      font-family: var(--serif); font-style: italic;
-      font-size: 1.05rem; color: var(--navy);
-      background: var(--offwhite);
+      font-family: var(--serif); font-style: italic; font-size: 1.05rem;
+      color: var(--navy); background: var(--offwhite);
     }
 
     /* ── Services ───────────────────────────────────────── */
     .services { background: var(--offwhite); }
-    .services-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem;
-    }
-    .service-card {
-      background: #fff; overflow: hidden;
-      box-shadow: 0 2px 12px rgba(27,58,92,.07);
-    }
-    .service-card img {
-      width: 100%; height: 220px; object-fit: cover; display: block;
-    }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+    .service-card { background: #fff; overflow: hidden; box-shadow: 0 2px 12px rgba(27,58,92,.07); }
+    .service-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
     .service-card-body { padding: 1.75rem; }
     .service-num {
       font-family: var(--serif); font-size: .75rem;
@@ -232,8 +175,7 @@
     .service-body { font-size: .9rem; color: #4a6275; line-height: 1.6; }
     .service-list { list-style: none; margin-top: 1rem; }
     .service-list li {
-      font-size: .85rem; color: #4a6275; padding: .3rem 0;
-      padding-left: 1rem; position: relative;
+      font-size: .85rem; color: #4a6275; padding: .3rem 0 .3rem 1rem; position: relative;
     }
     .service-list li::before {
       content: ''; position: absolute; left: 0; top: .65rem;
@@ -243,17 +185,14 @@
     /* ── Proof ──────────────────────────────────────────── */
     .proof {
       background: linear-gradient(135deg, var(--navy-dk), var(--navy));
-      color: #fff; text-align: center;
-      position: relative; overflow: hidden;
+      color: #fff; text-align: center; position: relative; overflow: hidden;
     }
     .proof-bg {
       position: absolute; inset: 0;
       background-image: url('images/proof-cow-960.jpg');
-      background-size: cover; background-position: center;
-      opacity: .12;
+      background-size: cover; background-position: center; opacity: .12;
     }
     .proof-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
-    .proof .section-title { color: #fff; margin: 0 auto 1rem; }
     .proof-callout {
       font-family: var(--serif); font-size: clamp(1.2rem, 2.5vw, 1.6rem);
       font-style: italic; color: var(--offwhite);
@@ -262,63 +201,51 @@
     }
 
     /* ── Mastermind CTA ─────────────────────────────────── */
-    .mastermind {
-      background: var(--offwhite);
-      border-top: 3px solid var(--crimson);
-    }
-    .mastermind-inner {
-      display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
-    }
+    .mastermind { background: var(--offwhite); border-top: 3px solid var(--crimson); }
+    .mastermind-inner { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
     .mastermind-tag {
       display: inline-block; background: var(--crimson); color: #fff;
       font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
       padding: .3rem .8rem; margin-bottom: 1rem;
     }
 
-    /* ── Free Series ────────────────────────────────────── */
-    .free-series {
-      background: var(--navy);
-      color: #fff; text-align: center;
+    /* ── Stay Tuned (replaces Free Series) ──────────────── */
+    .stay-tuned { background: var(--navy); color: #fff; text-align: center; }
+    .stay-tuned .section-title { color: #fff; margin: 0 auto 1rem; }
+    .stay-tuned .section-body { color: rgba(255,255,255,.75); margin: 0 auto 2rem; max-width: 560px; }
+    .stay-tuned-email {
+      display: inline-block;
+      font-family: var(--serif); font-size: 1.1rem;
+      color: var(--offwhite);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,.35);
+      padding-bottom: .15rem;
+      transition: border-color .2s, color .2s;
     }
-    .free-series .section-title { color: #fff; margin: 0 auto 1rem; }
-    .free-series .section-body { color: rgba(255,255,255,.75); margin: 0 auto 2rem; }
-    .free-series-form {
-      max-width: 500px; margin: 0 auto;
-      display: flex; flex-direction: column; gap: 1rem;
-    }
-    .free-series-form input[type="email"] {
-      padding: .9rem 1.2rem;
-      font-size: 1rem; font-family: inherit;
-      border: 1px solid rgba(255,255,255,.3);
-      background: rgba(255,255,255,.08); color: #fff;
-      outline: none; border-radius: 2px;
-    }
-    .free-series-form input[type="email"]::placeholder { color: rgba(255,255,255,.4); }
-    .free-series-form input[type="email"]:focus { border-color: var(--steel); }
-    /* MAILERLITE_EMBED_PLACEHOLDER — replace the form above with MailerLite embed code */
+    .stay-tuned-email:hover { color: #fff; border-color: var(--steel); }
 
     /* ── Contact ────────────────────────────────────────── */
     .contact { padding: 0; }
     .contact-split {
-      display: grid; grid-template-columns: 1fr 1fr; min-height: 600px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 600px; overflow: hidden; width: 100%;
     }
     .contact-info {
       background: var(--navy-dk);
       padding: 5.5rem 3.5rem;
       display: flex; flex-direction: column; justify-content: center;
+      min-width: 0;
     }
     .contact-info .section-title { color: #fff; }
     .contact-info .section-body { color: rgba(255,255,255,.75); margin-bottom: 2.5rem; }
-    .contact-detail {
-      display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem;
-    }
+    .contact-detail { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem; }
     .contact-icon {
       width: 36px; height: 36px; background: var(--crimson);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; margin-top: .1rem;
     }
     .contact-icon svg { width: 16px; height: 16px; fill: #fff; }
-    .contact-detail-text { font-size: .95rem; }
+    .contact-detail-text { font-size: .95rem; min-width: 0; }
     .contact-detail-label {
       font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
       color: var(--steel); display: block; margin-bottom: .2rem;
@@ -327,7 +254,7 @@
     .contact-detail-value a { color: rgba(255,255,255,.85); text-decoration: none; }
     .contact-detail-value a:hover { color: #fff; }
 
-    .contact-form-wrap { position: relative; overflow: hidden; }
+    .contact-form-wrap { position: relative; overflow: hidden; min-width: 0; }
     .contact-form-bg {
       position: absolute; inset: 0;
       background-size: cover; background-position: center;
@@ -349,21 +276,22 @@
       50%     { opacity: 1; background-image: url('images/contact-farm-sunrise.jpg'); }
       90%,100%{ opacity: 0; background-image: url('images/contact-farm-sunrise.jpg'); }
     }
-    .contact-form-overlay {
-      position: absolute; inset: 0;
-      background: rgba(17, 40, 64, .72);
-    }
+    .contact-form-overlay { position: absolute; inset: 0; background: rgba(17,40,64,.72); }
     .contact-form-inner {
       position: relative; z-index: 1;
-      padding: 5.5rem 3rem;
-      display: flex; flex-direction: column; justify-content: center; height: 100%;
+      padding: 4rem 2.5rem;
+      display: flex; flex-direction: column; justify-content: center;
+      height: 100%; min-width: 0; width: 100%;
     }
     .contact-form-title {
       font-family: var(--serif); font-size: 1.5rem; font-weight: 700;
       color: #fff; margin-bottom: 1.5rem;
     }
-    .form-row { display: flex; gap: 1rem; }
-    .form-field { flex: 1; display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1rem; }
+    .form-row { display: flex; gap: 1rem; width: 100%; }
+    .form-field {
+      flex: 1; min-width: 0;
+      display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1rem;
+    }
     .form-field label {
       font-size: .75rem; letter-spacing: .08em; text-transform: uppercase;
       color: rgba(255,255,255,.6);
@@ -371,6 +299,7 @@
     .form-field input,
     .form-field select,
     .form-field textarea {
+      width: 100%; min-width: 0;
       padding: .75rem 1rem;
       font-size: .95rem; font-family: inherit;
       background: rgba(255,255,255,.1);
@@ -384,28 +313,19 @@
     .form-field input::placeholder,
     .form-field textarea::placeholder { color: rgba(255,255,255,.35); }
     .form-field select option { background: var(--navy); color: #fff; }
-    .form-field textarea { resize: vertical; min-height: 100px; }
+    .form-field textarea { resize: vertical; min-height: 90px; }
     .form-error {
       display: none; background: rgba(139,26,26,.2); border: 1px solid var(--crimson);
-      color: #fff; padding: .75rem 1rem; font-size: .9rem; margin-bottom: 1rem;
-      border-radius: 2px;
+      color: #fff; padding: .75rem 1rem; font-size: .9rem; margin-bottom: 1rem; border-radius: 2px;
     }
     .form-success {
       display: none; background: rgba(74,123,168,.25); border: 1px solid var(--steel);
-      color: #fff; padding: .75rem 1rem; font-size: .9rem; margin-bottom: 1rem;
-      border-radius: 2px;
+      color: #fff; padding: .75rem 1rem; font-size: .9rem; margin-bottom: 1rem; border-radius: 2px;
     }
 
     /* ── Footer ─────────────────────────────────────────── */
-    footer {
-      background: var(--navy-dk);
-      padding: 2.5rem 0;
-      border-top: 3px solid var(--crimson);
-    }
-    .footer-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
-    }
+    footer { background: var(--navy-dk); padding: 2.5rem 0; border-top: 3px solid var(--crimson); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-copy { font-size: .8rem; color: rgba(255,255,255,.45); }
     .footer-links { display: flex; gap: 2rem; }
     .footer-links a {
@@ -418,6 +338,9 @@
     .footer-divisions a:hover { color: rgba(255,255,255,.7); }
 
     /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .contact-form-inner { padding: 3.5rem 2rem; }
+    }
     @media (max-width: 900px) {
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .about-accent { display: none; }
@@ -427,10 +350,9 @@
       .contact-form-inner { padding: 3rem 2rem; }
       .mastermind-inner { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr; }
-      nav { padding: .75rem 1.25rem; }
       .nav-links { display: none; }
       .nav-toggle { display: block; }
-      .hero-content { max-width: 100%; }
+      nav { padding: .75rem 1.25rem; }
     }
     @media (max-width: 600px) {
       .hero { min-height: 90vh; }
@@ -443,14 +365,11 @@
 
   <!-- Nav -->
   <nav id="main-nav">
-    <a href="#" class="nav-logo">
-      <span class="nav-wordmark">ATHYR&nbsp;VET</span>
-    </a>
+    <a href="#" class="nav-wordmark">ATHYR&nbsp;VET</a>
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#training">Training</a>
-      <a href="#free-series">Free Series</a>
       <a href="#contact">Contact</a>
     </div>
     <a href="#contact" class="nav-cta">Work With Us</a>
@@ -632,27 +551,16 @@
     </div>
   </section>
 
-  <!-- Free Series -->
-  <section class="free-series" id="free-series">
+  <!-- Stay Tuned (Free Series placeholder) -->
+  <section class="stay-tuned" id="updates">
     <div class="container">
-      <p class="section-eyebrow" style="color: var(--steel);">Free 12-Week Series</p>
+      <p class="section-eyebrow" style="color: var(--steel);">Coming Soon</p>
       <div class="rule rule--center"></div>
-      <h2 class="section-title">12 weeks. One data concept per week.<br>Free.</h2>
+      <h2 class="section-title">Free educational series &mdash; in development.</h2>
       <p class="section-body">
-        No pitch. No upsell. Just twelve short videos that will change how you look at your herd data &mdash; delivered to your inbox, one per week.
+        A short-video series on dairy herd data is in the works. In the meantime, reach out directly &mdash; every farm conversation starts the same way: with your data.
       </p>
-
-      <!-- MAILERLITE_EMBED_START -->
-      <!-- Replace the form below with your MailerLite embed code -->
-      <form class="free-series-form" id="ml-form">
-        <input type="email" name="email" placeholder="Your email address" required />
-        <button type="submit" class="btn btn--primary">Send Me the Free Series</button>
-      </form>
-      <!-- MAILERLITE_EMBED_END -->
-
-      <p style="font-size: .78rem; color: rgba(255,255,255,.4); margin-top: 1.25rem;">
-        No spam. Unsubscribe anytime.
-      </p>
+      <a href="mailto:aurora@athyrvet.com" class="stay-tuned-email">aurora@athyrvet.com</a>
     </div>
   </section>
 
@@ -781,13 +689,10 @@
     let navOpen = false;
     toggle.addEventListener('click', () => {
       navOpen = !navOpen;
-      if (navOpen) {
-        navLinks.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(17,40,64,.98);padding:1.5rem 2rem;gap:1.25rem;z-index:99;';
-      } else {
-        navLinks.style.cssText = 'display:none;';
-      }
+      navLinks.style.cssText = navOpen
+        ? 'display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(17,40,64,.98);padding:1.5rem 2rem;gap:1.25rem;z-index:99;'
+        : 'display:none;';
     });
-    // Close nav on link click
     navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       navOpen = false; navLinks.style.cssText = 'display:none;';
     }));
@@ -809,8 +714,7 @@
       }
       try {
         const res = await fetch(action, {
-          method: 'POST',
-          body: new FormData(contactForm),
+          method: 'POST', body: new FormData(contactForm),
           headers: { 'Accept': 'application/json' }
         });
         if (res.ok) {
@@ -826,18 +730,6 @@
         errEl.style.display = 'block';
       }
     });
-
-    // Free series form placeholder
-    const mlForm = document.getElementById('ml-form');
-    if (mlForm) {
-      mlForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const errDiv = document.createElement('p');
-        errDiv.style.cssText = 'color:#8B1A1A;background:rgba(139,26,26,.1);padding:.75rem;margin-top:.5rem;border:1px solid #8B1A1A;font-size:.9rem;';
-        errDiv.textContent = 'MailerLite not yet connected. Replace this form with your MailerLite embed code.';
-        mlForm.parentNode.insertBefore(errDiv, mlForm.nextSibling);
-      });
-    }
   </script>
 </body>
 </html>
