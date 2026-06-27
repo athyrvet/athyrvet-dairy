@@ -49,8 +49,9 @@
     }
     .btn:hover { opacity: .85; }
     .btn--primary { background: var(--crimson); color: #fff; border: none; }
-    .btn--outline { background: transparent; color: #fff; border: 2px solid #fff; }
-    .btn--navy    { background: var(--navy); color: #fff; border: none; }
+    .btn--outline  { background: transparent; color: #fff; border: 2px solid #fff; }
+    .btn--navy     { background: var(--navy); color: #fff; border: none; }
+    .btn--steel    { background: var(--steel); color: #fff; border: none; }
 
     /* ── Nav ────────────────────────────────────────────── */
     nav {
@@ -99,7 +100,20 @@
       position: absolute; inset: 0;
       background: linear-gradient(to right, rgba(17,40,64,.95) 0%, rgba(17,40,64,.90) 38%, rgba(17,40,64,.40) 65%, rgba(17,40,64,.06) 100%);
     }
-    .hero-content { position: relative; z-index: 1; padding-top: 6rem; max-width: 520px; }
+
+    /* Hero uses a 3-column grid — text lives in col 1, photo shows through cols 2 & 3 */
+    .hero > .container {
+      max-width: 100%;
+      width: 100%;
+      padding: 0 4%;
+      display: grid;
+      grid-template-columns: 400px 1fr 1fr;
+    }
+
+    .hero-content {
+      grid-column: 1;
+      position: relative; z-index: 1; padding-top: 6rem;
+    }
     .hero-eyebrow {
       font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
       color: #fff; margin-bottom: 1.25rem;
@@ -113,7 +127,7 @@
       font-family: var(--serif); font-size: clamp(1.05rem, 2vw, 1.3rem);
       color: var(--offwhite); margin-bottom: 2rem; letter-spacing: .04em;
     }
-    .hero-sub { font-size: .97rem; color: rgba(255,255,255,.7); margin-bottom: 2.5rem; max-width: 520px; }
+    .hero-sub { font-size: .97rem; color: rgba(255,255,255,.7); margin-bottom: 2.5rem; }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
     /* ── Stats bar ──────────────────────────────────────── */
@@ -209,7 +223,7 @@
       padding: .3rem .8rem; margin-bottom: 1rem;
     }
 
-    /* ── Stay Tuned (replaces Free Series) ──────────────── */
+    /* ── Stay Tuned ─────────────────────────────────────── */
     .stay-tuned { background: var(--navy); color: #fff; text-align: center; }
     .stay-tuned .section-title { color: #fff; margin: 0 auto 1rem; }
     .stay-tuned .section-body { color: rgba(255,255,255,.75); margin: 0 auto 2rem; max-width: 560px; }
@@ -254,17 +268,22 @@
     .contact-detail-value a { color: rgba(255,255,255,.85); text-decoration: none; }
     .contact-detail-value a:hover { color: #fff; }
 
-    .contact-form-wrap { position: relative; overflow: hidden; min-width: 0; background: #1e4570; }
+    /* Contact form — solid navy background, no animated images */
+    .contact-form-wrap {
+      background: var(--navy);
+      min-width: 0;
+    }
     .contact-form-inner {
-      position: relative; z-index: 1;
       padding: 4rem 2.5rem;
       display: flex; flex-direction: column; justify-content: center;
       height: 100%; min-width: 0; width: 100%;
     }
     .contact-form-title {
-      font-family: var(--serif); font-size: 1.5rem; font-weight: 700;
+      font-size: 1.4rem; font-weight: 600;
       color: #fff; margin-bottom: 1.5rem;
     }
+    /* Override serif font inside contact form for consistency */
+    .contact-form-inner .btn { font-family: inherit; letter-spacing: .03em; }
     .form-row { display: flex; gap: 1rem; width: 100%; }
     .form-field {
       flex: 1; min-width: 0;
@@ -317,9 +336,11 @@
 
     /* ── Responsive ─────────────────────────────────────── */
     @media (max-width: 1024px) {
+      .hero > .container { grid-template-columns: 360px 1fr; padding: 0 3%; }
       .contact-form-inner { padding: 3.5rem 2rem; }
     }
     @media (max-width: 900px) {
+      .hero > .container { grid-template-columns: 1fr; padding: 0 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .about-accent { display: none; }
       .services-grid { grid-template-columns: 1fr; }
@@ -370,7 +391,7 @@
         <p class="hero-sub">The cows are talking to you. Your data already has the answers. I translate them into action &mdash; before it gets expensive.</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn--primary">Talk to Dr. V</a>
-          <a href="#services" class="btn btn--outline">See Services</a>
+          <a href="#services" class="btn btn--steel">See Services</a>
         </div>
       </div>
     </div>
@@ -407,22 +428,22 @@
         <div>
           <p class="section-eyebrow">About</p>
           <div class="rule"></div>
-          <h2 class="section-title">When data and cow sense come from the same person.</h2>
+          <h2 class="section-title">When data expertise and cow sense come in the same package.</h2>
           <p class="section-body" style="margin-bottom: 1.25rem;">
-            Dr. V is a veterinary epidemiologist and board-certified preventive medicine specialist &mdash; the resource dairy farms reach for when the data flags a problem and the cause isn&rsquo;t obvious.
+            Dr. V is a veterinarian specialized in epidemiology, and a board-certified preventive medicine specialist &mdash; a resource dairy farms call when the data flags a problem and the cause isn&rsquo;t obvious.
           </p>
           <p class="section-body" style="margin-bottom: 1.25rem;">
             Most dairies have data. Few have answers. That gap is where the work happens. Whether it is reproductive efficiency, involuntary culling, or herd health events that defy explanation &mdash; the data gets followed until it points to exactly where to look first.
           </p>
           <p class="section-body" style="margin-bottom: 2rem;">
-            Founded in 2008. Trained at UC Davis. Proven in some of the world&rsquo;s most complex dairy operations. Now working for yours.
+            Founded in 2008. Trained at UC Davis and Colorado State University. Experience spanning family dairies to 3,400-cow operations across three continents. Now working for yours.
           </p>
           <div class="about-creds">
-            <span class="cred-line">DVM &middot; MPVM &middot; PhD</span>
+            <span class="cred-line">DVM (1996) &middot; MPVM (2002) &middot; PhD in Epidemiology (2007)</span>
             <span class="cred-line">DACVPM &mdash; Diplomate, American College of Veterinary Preventive Medicine</span>
-            <span class="cred-line">Certified Veterinary Acupuncturist (CVA)</span>
-            <span class="cred-line">Certified TCVM Practitioner (CTP)</span>
-            <span class="cred-line">CVFT &middot; CVBMA &middot; FADD</span>
+            <span class="cred-line">FADD &mdash; Foreign Animal Disease Diagnostician, USDA (2024)</span>
+            <span class="cred-line">Author &mdash; Practical Clinical Epidemiology for the Veterinarian (Wiley, 2015)</span>
+            <span class="cred-line">250+ conference presentations and publications worldwide</span>
           </div>
           <blockquote class="about-quote">
             &ldquo;The cows are always talking. Data makes it possible to finally hear them.&rdquo;
@@ -438,7 +459,7 @@
       <p class="section-eyebrow">Services</p>
       <div class="rule"></div>
       <h2 class="section-title">Stop asking the wrong questions.</h2>
-      <p class="section-body">Targeted consulting for dairy farms that are ready to stop guessing and start reading their data correctly.</p>
+      <p class="section-body" style="max-width: 100%;">Consulting for dairy farms ready to stop guessing and start reading their data.</p>
 
       <div class="services-grid">
         <div class="service-card">
@@ -498,7 +519,7 @@
         <div class="rule rule--center"></div>
         <h2 class="section-title" style="color: #fff; max-width: 100%;">Your data already has the story.<br>Most people just cannot read it yet.</h2>
         <blockquote class="proof-callout">
-          &ldquo;Most vets examine cows. I let the data tell me where to look first.&rdquo;
+          &ldquo;I let the data tell me where to look &mdash; before I ever touch a cow.&rdquo;
         </blockquote>
         <p class="section-body" style="color: rgba(255,255,255,.75); margin: 0 auto 2.5rem;">
           When farms implement data-driven reproductive protocols informed by epidemiological analysis, conception rates move from the low 30s to 60% and above. Involuntary culling drops. Emergency calls decrease. The farm stops being reactive and starts being strategic.
@@ -529,7 +550,7 @@
     </div>
   </section>
 
-  <!-- Stay Tuned (Free Series placeholder) -->
+  <!-- Stay Tuned -->
   <section class="stay-tuned" id="updates">
     <div class="container">
       <p class="section-eyebrow" style="color: var(--steel);">Coming Soon</p>
@@ -579,8 +600,8 @@
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14" style="stroke:#fff;stroke-width:2;fill:none;"/></svg>
           </div>
           <div class="contact-detail-text">
-            <span class="contact-detail-label">Time Zone</span>
-            <span class="contact-detail-value">Hawaii (GMT-10) &mdash; available worldwide</span>
+            <span class="contact-detail-label">Availability</span>
+            <span class="contact-detail-value">Available by appointment &middot; 1:00 PM &ndash; 1:00 AM PST</span>
           </div>
         </div>
       </div>
@@ -708,3 +729,4 @@
   </script>
 </body>
 </html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
